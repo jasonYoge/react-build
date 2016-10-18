@@ -2,11 +2,6 @@ var config =  require('./base');
 var webpack = require('webpack');
 
 var devConfig = Object.assign({}, config, {
-    entry: [
-        'webpack-dev-server/client?http://localhost:8080',
-        'webpack/hot/dev-server',
-        './src/index.js'
-    ],
     devServer: {
         // 当浏览器不支持historyApi时采用回退方式实现api
         historyApiFallback: true,
@@ -26,5 +21,14 @@ devConfig.plugins = config.plugins.concat([
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
 ]);
+/**
+ *  为所有的entry数组添加webpack-dev-server
+ *  devConfig.entry {Object} entry对象
+ *  return {Array} 返回entry中的属性名
+ */
+Object.keys(devConfig.entry).map(function (name) {
+    devConfig.entry[name].unshift('webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/dev-server');
+})
 
 module.exports = devConfig;

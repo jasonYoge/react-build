@@ -4,11 +4,34 @@ var webpack = require('webpack');
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var js = glob.sync('./src/pages/**/index.js').reduce(function (prev, curr) {
+    prev[curr.slice(6, -3)] = [curr];
+    return prev;
+}, {});
+var pages = glob.sync('./src/pages/**/*.html').map(function (item) {
+    return new HtmlWebpackPlugin({
+        filename: item.substr(6),
+        template: item,
+        inject: true,
+        hash: true,
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            preserveLineBreaks: true,
+            collapseInlineTagWhitespace: true,
+            collapseBooleanAttributes: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            caseSensitive: true,
+            minifyJS: true,
+            minifyCSS: true,
+            quoteCharactre: '"'
+        }
+    })
+});
 module.exports = {
     devtool: '#cheap-module-eval-source-map',
-    entry: {
-        index: './src/index.js'
-    },
+    entry: js,
     output: {
         path: path.resolve(__dirname, './build'),
         filename: '[name]_[hash:5].js'
@@ -25,7 +48,7 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
-            loader: "style!css?modules&importLoaders=1!resolve-url!sass"
+            loader: "style!css?modules&importLoaders=1!sass"
         }, {
             test: /\.json$/,
             loader: "json"
@@ -33,14 +56,5 @@ module.exports = {
     },
     plugins: [
         new ProgressBarPlugin(),
-        new HtmlWebpackPlugin({
-            title: 'My App',
-            filename: 'admin.html',
-            template: './src/index.html',
-            inject: 'body',
-            cache: true,
-            showErrors: false,
-            hash: true
-        })
-    ]
+    ].concat(pages)
 }
