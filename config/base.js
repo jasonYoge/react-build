@@ -3,6 +3,9 @@ var glob = require('glob');
 var webpack = require('webpack');
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefix = require('autoprefix');
+var precss = require('precss');
 
 var js = glob.sync('./src/pages/**/index.js').reduce(function (prev, curr) {
     prev[curr.slice(6, -3)] = [curr];
@@ -30,7 +33,7 @@ var pages = glob.sync('./src/pages/**/*.html').map(function (item) {
     })
 });
 module.exports = {
-    devtool: '#cheap-module-eval-source-map',
+    devtool: 'source-map',
     entry: js,
     output: {
         path: path.resolve(__dirname, './build'),
@@ -48,7 +51,7 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
-            loader: "style!css?modules&importLoaders=1!sass"
+            loader: ExtractTextPlugin.extract('style', 'css', 'postcss', 'sass')
         }, {
             test: /\.json$/,
             loader: "json"
@@ -56,5 +59,10 @@ module.exports = {
     },
     plugins: [
         new ProgressBarPlugin(),
-    ].concat(pages)
+        new ExtractTextPlugin('[name].[contenthash:5].css')
+    ].concat(pages),
+    postcss: [
+        autoprefix,
+        precss
+    ]
 }
