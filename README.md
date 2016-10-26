@@ -9,3 +9,6 @@ Imported scss file,and we can webpack all files index.html and index.js under pa
 
 ##	version 1.3.0
 Used extract-text-webpack-plugin to extract css file from html.Besides,add postcss platform.
+
+##	version 1.4.0
+Extracted react files out of js file and webpack it as a dll file.

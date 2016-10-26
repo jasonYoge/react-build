@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 var autoprefix = require('autoprefix');
 var precss = require('precss');
 
@@ -32,11 +33,12 @@ var pages = glob.sync('./src/pages/**/*.html').map(function (item) {
         }
     })
 });
+
 module.exports = {
     devtool: 'source-map',
     entry: js,
     output: {
-        path: path.resolve(__dirname, './build'),
+        path: path.resolve(__dirname, '../build'),
         filename: '[name]_[hash:5].js'
     },
     module: {
@@ -55,11 +57,23 @@ module.exports = {
         }, {
             test: /\.json$/,
             loader: "json"
+        }, {
+            test: /\.(png | PNG | jpg | gif | svg | woff2? | eot| ttf)(\?.*)?$/,
+            loader: 'url',
+            query: {
+                limit: 10000,
+                name: '[name].[ext]?[hash:7]'
+            }
         }]
     },
     plugins: [
         new ProgressBarPlugin(),
-        new ExtractTextPlugin('[name].[contenthash:5].css')
+        new ExtractTextPlugin('[name].[contenthash:5].css'),
+        new webpack.DllReferencePlugin({
+            context: path.resolve(__dirname, '../'),
+            manifest: require('../build/vendor/react-manifest.json')
+        }),
+        new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer' })
     ].concat(pages),
     postcss: [
         autoprefix,

@@ -19,12 +19,17 @@ var devConfig = Object.assign({}, config, {
 });
 devConfig.plugins = config.plugins.concat([
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+        'process.env': {
+            'NODE_ENV': JSON.stringify('development')
+        }
+    })
 ]);
 /**
  *  为所有的entry数组添加webpack-dev-server
- *  devConfig.entry {Object} entry对象
- *  return {Array} 返回entry中的属性名
+ *  @param {Object} devConfig.entry entry对象
+ *  @return {Array} 返回entry中的属性名
  */
 Object.keys(devConfig.entry).map(function (name) {
     devConfig.entry[name].unshift('webpack-dev-server/client?http://localhost:8080',
