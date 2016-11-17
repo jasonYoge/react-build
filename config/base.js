@@ -53,16 +53,16 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
-            loader: ExtractTextPlugin.extract('style', 'css', 'postcss', 'sass')
+            loader: ExtractTextPlugin.extract('style', 'css!sass')
         }, {
             test: /\.json$/,
             loader: "json"
         }, {
-            test: /\.(png | PNG | jpg | gif | svg | woff2? | eot| ttf)(\?.*)?$/,
-            loader: 'url',
+            test: /\.(png|PNG|jpg|gif|svg|woff2|eot|ttf)$/,
+            loader: 'url-loader',
             query: {
                 limit: 10000,
-                name: '[name].[ext]?[hash:7]'
+                name: 'img/[name].[ext]'
             }
         }]
     },
@@ -74,9 +74,5 @@ module.exports = {
             manifest: require('../build/vendor/react-manifest.json')
         }),
         new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer' })
-    ].concat(pages),
-    postcss: [
-        autoprefix,
-        precss
-    ]
+    ].concat(pages)
 }

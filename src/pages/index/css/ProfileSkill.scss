@@ -1,0 +1,61 @@
+@import 'Mixin.scss';
+$size: 200px;
+$bg_color: yellowgreen;
+$end_color: #655;
+$angle: 90;
+
+.profile-skill {
+    @include profile-section;
+
+    .pie-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        li {
+            width: 25%;
+            text-align: center;
+
+            .pie {
+                width: $size;
+                height: $size;
+                border-radius: 50%;
+                background: $bg_color;
+                background-image: linear-gradient(to right, transparent 50%, $end_color 0);
+                margin: auto;
+
+                &:before {
+                    content: '';
+                    display: block;
+                    height: $size;
+                    background-color: inherit;
+                    margin-left: 50%;
+                    border-radius: 0 100% 100% 0 / 50%;
+                    transform-origin: left;
+                    transition: transform 2s ease;
+                }
+            }
+
+            @while $angle>0 {
+                .move-to-#{$angle}:before {
+                    transform: rotate(($angle/100) + turn);
+                };
+                $angle: $angle - 10;
+            }
+
+            h4 {
+                font-size: 200%;
+                padding: .3em 0;
+            }
+
+            span {
+                display: block;
+                padding-top: .5em;
+            }
+
+            @media (max-width: $gaint) {
+                width: 50%;
+            }
+        }
+    }
+}

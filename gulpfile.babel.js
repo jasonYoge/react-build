@@ -15,8 +15,7 @@ if (process.env.NODE_ENV === 'development') {
 // 开发环境热加载
 gulp.task('webpack-dev-server', (callback) => {
     new WebpackDevServer(webpack(devConfig), {
-        // contentBase: './src',
-        // publicPath: '/build/'
+        publicPath: 'http://localhost:8080/src'
     }).listen(8080, 'localhost', (err) => {
         if (err)
             throw new Error(err);

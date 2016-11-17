@@ -1,0 +1,10 @@
+@import 'Mixin.scss';
+
+.profile-intro {
+    @include border-bottom;
+    @include profile-section;
+
+    p {
+        margin-top: 1em;
+    }
+}

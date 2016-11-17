@@ -1,0 +1,28 @@
+@import 'Mixin.scss';
+
+.profile-header {
+    width: 100%;
+    background: url('../img/header.jpg') no-repeat center / cover;
+    height: 620px;
+    position: relative;
+    padding: 260px 200px;
+    box-sizing: border-box;
+    color: white;
+    @include margin-top;
+
+    &:after {
+        content: '';
+        top:0;left:0;right:0;bottom:0;
+        position: absolute;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 300%;
+    }
+
+    p {
+        font-size: 250%;
+    }
+}

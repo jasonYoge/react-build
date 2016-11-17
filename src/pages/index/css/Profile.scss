@@ -1,0 +1,5 @@
+@import 'Mixin.scss';
+
+.profile {
+    @include content;
+}

@@ -1,0 +1,40 @@
+@import 'Mixin.scss';
+
+nav {
+    width: 23%;
+    background: #5f6d7e;
+    height:100%;
+    color: white;
+    min-width: 300px;
+    @include margin-top;
+
+    .navbar-link {
+        margin-top: 4em;
+
+        li {
+            font-size: 130%;
+            line-height: 3em;
+            width: 100%;
+
+            a {
+                display: block;
+                width: 100%;
+                @include navbar-padding;
+                box-sizing: border-box;
+                transition: background .5s ease;
+
+                &.nav-active {
+                    background: #495461;
+                }
+
+                &:hover {
+                    background: #495461;
+                }
+            }
+
+            i {
+                padding-right: .5em;
+            }
+        }
+    }
+}

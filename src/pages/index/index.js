@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/main.js';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import Reducer from './reducers/reducer';
+import Root from './Root';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+let store = createStore(
+    Reducer,
+    applyMiddleware(
+        thunkMiddleware
+    )
+);
+
+store.subscribe(() => {
+    console.log(store.getState());
+});
+
+ReactDOM.render( <Root store={store}/>, document.getElementById('app'));

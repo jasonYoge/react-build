@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        react: ['react', 'react-dom', 'redux', 'react-redux']
+        react: ['react', 'react-dom', 'redux', 'react-redux', 'react-router']
     },
     output: {
         path: path.resolve(__dirname, '../build/vendor'),
