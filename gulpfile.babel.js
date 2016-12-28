@@ -12,16 +12,18 @@ if (process.env.NODE_ENV === 'production') {
 if (process.env.NODE_ENV === 'development') {
     var devConfig = require('./config/dev');
 }
+
 // 开发环境热加载
 gulp.task('webpack-dev-server', (callback) => {
     new WebpackDevServer(webpack(devConfig), {
-        publicPath: 'http://localhost:8080/src'
+        publicPath: 'http://www.yangwenjie.net.cn/api/'
     }).listen(8080, 'localhost', (err) => {
         if (err)
             throw new Error(err);
         console.log('Webpack-dev-server is running at port 8080.');
     });
 });
+
 //  生产环境生成build文件夹
 gulp.task('webpack:build', (callback) => {
     webpack(prodConfig, (err, stats) => {
@@ -30,6 +32,7 @@ gulp.task('webpack:build', (callback) => {
         console.log('Webpacked files in build filter.');
     });
 });
+
 //  打包dll文件
 gulp.task('build-dll', (callback) => {
     webpack(dllConfig, (err, stats) => {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './ProfileHeader';
 import Intro from './ProfileIntro';
 import Skill from './ProfileSkill';
+import Footer from './Footer';
 require('../css/Profile.scss');
 
 /**
@@ -21,6 +22,7 @@ export default class Profile extends Component {
                 <Header></Header>
                 <Intro></Intro>
                 <Skill showSkill={ this.state.showSkill }></Skill>
+                <Footer></Footer>
             </div>
         );
     }

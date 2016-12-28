@@ -9,6 +9,10 @@
     box-sizing: border-box;
     color: white;
     @include margin-top;
+    @media (max-width: 950px) {
+        padding: 100px 50px;
+        height: 400px;
+    }
 
     &:after {
         content: '';

@@ -40,6 +40,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../build'),
         filename: '[name]_[hash:5].js'
+        // publicPath: 'http://www.yangwenjie.net.cn/api/'
     },
     module: {
         preloaders: [{
@@ -61,7 +62,7 @@ module.exports = {
             test: /\.(png|PNG|jpg|gif|svg|woff2|eot|ttf)$/,
             loader: 'url-loader',
             query: {
-                limit: 10000,
+                limit: 14000,
                 name: 'img/[name].[ext]'
             }
         }]

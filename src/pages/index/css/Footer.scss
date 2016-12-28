@@ -1,0 +1,14 @@
+@import 'Mixin.scss';
+
+footer {
+    background: #323b43;
+    width: 100%;
+    line-height: 200px;
+    color: white;
+    text-align: center;
+
+    @media (max-width: $small) {
+        font-size: 12px;
+        line-height: 140px;
+    }
+}

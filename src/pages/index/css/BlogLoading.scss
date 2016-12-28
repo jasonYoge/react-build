@@ -1,0 +1,13 @@
+$size: 50px;
+
+.blog-loading {
+    background: url('../imgs/loading.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: $size;
+    height: $size;
+    margin: 50px auto;
+    text-align: center;
+    line-height: $size;
+}

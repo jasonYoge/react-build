@@ -12,8 +12,8 @@ let store = createStore(
     )
 );
 
-store.subscribe(() => {
-    console.log(store.getState());
-});
+// store.subscribe(() => {
+//     console.log(store.getState());
+// });
 
 ReactDOM.render( <Root store={store}/>, document.getElementById('app'));

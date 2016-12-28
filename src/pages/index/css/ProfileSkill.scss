@@ -6,11 +6,26 @@ $angle: 90;
 
 .profile-skill {
     @include profile-section;
+    @media (max-width: $small) {
+        width: 100%;
+    }
+
+    .profile-skill-title {
+        @media (max-width: $small) {
+            margin-left: 5%;
+        }
+    }
 
     .pie-list {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        transition: all .5s linear;
+
+        @media (max-width: $small) {
+            width: 400%;
+            flex-wrap: nowrap;
+        }
 
         li {
             width: 25%;
@@ -55,6 +70,10 @@ $angle: 90;
 
             @media (max-width: $gaint) {
                 width: 50%;
+            }
+
+            @media (max-width: $small) {
+                width: 25%;
             }
         }
     }
