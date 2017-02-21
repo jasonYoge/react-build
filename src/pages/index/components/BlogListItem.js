@@ -8,7 +8,7 @@ require('../css/BlogListItem.scss');
 export default class BlogListItem extends Component {
     render() {
         return (
-            <li className="blog-list-item" onClick={ () => {hashHistory.push(`article/${this.props.id}`);}}>
+            <li className="blog-list-item" onClick={ () => { hashHistory.push(`article/${this.props.id}`); }}>
                 <h4>{ this.props.title }</h4>
                 <p className="blog-list-item-tag"><span>文章分类：</span>{ this.getTagname() }</p>
                 <p className="blog-list-item-content">{ this.props.desc }</p>

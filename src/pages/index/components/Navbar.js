@@ -21,7 +21,7 @@ export default class Navbar extends Component {
                 <ul onClick={this.onLinkGroupClick.bind(this)} className={!this.state.active ? 'navbar-link' : 'navbar-link active'}>
                     <li><Link to="/profile" activeClassName="nav-active"><i className="fa fa-pencil"></i>个人介绍</Link></li>
                     <li><Link to="/blog" activeClassName="nav-active"><i className="fa fa-paperclip"></i>博客</Link></li>
-                    <li><Link to="/contact" activeClassName="nav-active"><i className="fa fa-link"></i>联系我</Link></li>
+                    <li><Link to="/contact" activeClassName="nav-active" onClick={this.onClickContact.bind(this)}><i className="fa fa-link"></i>联系我</Link></li>
                 </ul>
                 <a className="link-btn" onClick={this.onLinkBtnClick.bind(this)}><i className="fa fa-bars"></i></a>
             </nav>
@@ -45,5 +45,9 @@ export default class Navbar extends Component {
         } else {
             this.setState({active: true});
         }
+    }
+
+    onClickContact () {
+        alert('暂未开放，敬请期待！');
     }
 }

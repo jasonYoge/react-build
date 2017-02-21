@@ -3,8 +3,6 @@ $middle: 825px;
 $small: 460px;
 
 @mixin margin-top {
-    margin-top: 100px;
-
     @media (max-width: $middle) {
         margin-top: 56px;
     }

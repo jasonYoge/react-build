@@ -39,9 +39,9 @@ function showProgressBar (state = true, action) {
         case COMPONENT_FINISHED:
             newState = Object.assign({}, state);
             newState.finished = state.finished + 1;
-            if (newState.finished > state.size) {
-                throw new Error('Finished size bigger than total size.Please cheak out.');
-            }
+            // if (newState.finished > state.size) {
+            //     throw new Error('Finished size bigger than total size.Please cheak out.');
+            // }
             return newState;
         case DATA_TOTAL_SIZE:
             newState = Object.assign({}, state);

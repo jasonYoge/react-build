@@ -2,6 +2,7 @@
 
 .blog-header {
     @include blog-section;
+    margin-top: 30px;
     @include margin-top;
     @include border-bottom;
 

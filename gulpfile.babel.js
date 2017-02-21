@@ -16,11 +16,13 @@ if (process.env.NODE_ENV === 'development') {
 // 开发环境热加载
 gulp.task('webpack-dev-server', (callback) => {
     new WebpackDevServer(webpack(devConfig), {
-        publicPath: 'http://www.yangwenjie.net.cn/api/'
+        // publicPath: 'http://www.yangwenjie.net.cn/api/',
+        contentBase: './'
+        // publicPath: '../img'
     }).listen(8080, 'localhost', (err) => {
         if (err)
             throw new Error(err);
-        console.log('Webpack-dev-server is running at port 8080.');
+        console.log('\nWebpack-dev-server is running at port 8080.');
     });
 });
 

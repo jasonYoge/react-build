@@ -77,7 +77,7 @@ class ProfileSkill extends Component {
             index++;
             if (index === 4) index = 3;
             this.setState({ index: index });
-        } else {
+        } else if (dir>0) {
             index--;
             if (index === -1) index = 0;
             this.setState({ index: index });

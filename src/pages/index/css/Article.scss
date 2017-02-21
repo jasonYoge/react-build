@@ -69,6 +69,16 @@
             font-size: 110%;
         }
 
+        img {
+            display: block;
+            margin: auto;
+
+            @media (max-width: $small) {
+                width: 100%;
+                height: auto;
+            }
+        }
+
         p {
             margin: 1em 0;
             line-height: 1.7;
@@ -94,10 +104,11 @@
 
         pre {
             width: 90%;
-            max-height: 400px;
             background: #FFFAF0;
             padding: 1.4em;
             overflow-x: auto;
+            overflow-scrolling: touch;
+            -webkit-overflow-scrolling: touch;
         }
 
         ul {
@@ -106,6 +117,10 @@
             li {
                 list-style: disc;
             }
+        }
+
+        span.hljs-params {
+            color: #f92672;
         }
     }
 }
