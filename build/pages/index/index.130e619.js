@@ -111,31 +111,9 @@
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	exports.__esModule = true;
-	function createThunkMiddleware(extraArgument) {
-	  return function (_ref) {
-	    var dispatch = _ref.dispatch;
-	    var getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        if (typeof action === 'function') {
-	          return action(dispatch, getState, extraArgument);
-	        }
-	
-	        return next(action);
-	      };
-	    };
-	  };
-	}
-	
-	var thunk = createThunkMiddleware();
-	thunk.withExtraArgument = createThunkMiddleware;
-	
-	exports['default'] = thunk;
+	module.exports = (__webpack_require__(3))(240);
 
 /***/ },
 /* 7 */
@@ -2195,6 +2173,9 @@
 	                    xhr.send(null);
 	                })();
 	            }
+	
+	            //  set leave hook
+	            this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
 	        }
 	    }, {
 	        key: 'render',
@@ -2232,9 +2213,21 @@
 	            var script = document.createElement('script');
 	            var contentElem = this.refs.content;
 	
-	            script.innerText = 'var duoshuoQuery = {short_name:"yangwenjie"};(function() {var ds = document.createElement("script");ds.type = "text/javascript";ds.async = true;ds.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//static.duoshuo.com/embed.js";ds.charset = "UTF-8";(document.getElementsByTagName("head")[0]|| document.getElementsByTagName("body")[0]).appendChild(ds);})();';
+	            script.text = 'var duoshuoQuery = {short_name:"yangwenjie"};(function() {var ds = document.createElement("script");ds.type = "text/javascript";ds.async = true;ds.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//static.duoshuo.com/embed.js";ds.charset = "UTF-8";(document.getElementsByTagName("head")[0]|| document.getElementsByTagName("body")[0]).appendChild(ds);})();';
 	            contentElem.appendChild(script);
 	            this.setState({ showPanel: true });
+	        }
+	    }, {
+	        key: 'routerWillLeave',
+	        value: function routerWillLeave(nextLocation) {
+	            var script = document.head.getElementsByTagName('script')[0];
+	            var css = document.head.querySelectorAll('[href*="doushuo"]');
+	
+	            if (script) {
+	                document.head.removeChild(script);
+	                console.log(css);
+	                document.body.removeChild(document.body.lastElementChild);
+	            }
 	        }
 	    }]);
 	
@@ -19996,4 +19989,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=index.a8ddc40.js.map
+//# sourceMappingURL=index.130e619.js.map

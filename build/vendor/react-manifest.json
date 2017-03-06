@@ -239,6 +239,7 @@
     "./node_modules/react-router/lib/createRouterHistory.js": 236,
     "./node_modules/react-router/lib/hashHistory.js": 237,
     "./node_modules/history/lib/createHashHistory.js": 238,
-    "./node_modules/history/lib/HashProtocol.js": 239
+    "./node_modules/history/lib/HashProtocol.js": 239,
+    "./node_modules/redux-thunk/lib/index.js": 240
   }
 }

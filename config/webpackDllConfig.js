@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        react: ['react', 'react-dom', 'redux', 'react-redux', 'react-router']
+        react: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'redux-thunk']
     },
     output: {
         path: path.resolve(__dirname, '../build/vendor'),
@@ -20,7 +20,8 @@ module.exports = {
             context: path.resolve(__dirname, '../')
         }),
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false, compress: {
+            sourceMap: false,
+            compress: {
                 // 不考虑对象的边际作用
                 pure_getters: true,
                 // 不支持ie8

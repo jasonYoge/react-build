@@ -5,13 +5,12 @@ var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-var autoprefix = require('autoprefix');
-var precss = require('precss');
 
 var js = glob.sync('./src/pages/**/index.js').reduce(function (prev, curr) {
     prev[curr.slice(6, -3)] = [curr];
     return prev;
 }, {});
+
 var pages = glob.sync('./src/pages/**/*.html').map(function (item) {
     return new HtmlWebpackPlugin({
         filename: item.substr(6),

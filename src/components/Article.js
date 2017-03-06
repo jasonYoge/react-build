@@ -45,6 +45,12 @@ export default class Article extends Component {
             xhr.open('get', `http://www.yangwenjie.net.cn/api/article/${id}`);
             xhr.send(null);
         }
+
+        //  set leave hook
+        this.props.router.setRouteLeaveHook (
+            this.props.route,
+            this.routerWillLeave
+        )
     }
 
     render () {
@@ -68,8 +74,19 @@ export default class Article extends Component {
         let script = document.createElement('script');
         let contentElem = this.refs.content;
 
-        script.innerText = 'var duoshuoQuery = {short_name:"yangwenjie"};(function() {var ds = document.createElement("script");ds.type = "text/javascript";ds.async = true;ds.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//static.duoshuo.com/embed.js";ds.charset = "UTF-8";(document.getElementsByTagName("head")[0]|| document.getElementsByTagName("body")[0]).appendChild(ds);})();';
+        script.text = 'var duoshuoQuery = {short_name:"yangwenjie"};(function() {var ds = document.createElement("script");ds.type = "text/javascript";ds.async = true;ds.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//static.duoshuo.com/embed.js";ds.charset = "UTF-8";(document.getElementsByTagName("head")[0]|| document.getElementsByTagName("body")[0]).appendChild(ds);})();';
         contentElem.appendChild(script);
         this.setState({ showPanel: true });
+    }
+
+    routerWillLeave (nextLocation) {
+        let script = document.head.getElementsByTagName('script')[0];
+        let css = document.head.querySelectorAll('[href*="doushuo"]');
+
+        if (script) {
+            document.head.removeChild(script);
+            console.log(css);
+            document.body.removeChild(document.body.lastElementChild);
+        }
     }
 }
