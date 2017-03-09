@@ -1,33 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Header from './BlogHeader';
 import List from './BlogList';
-import Loading from './BlogLoading';
 import Footer from './Footer';
+import Loading from './BlogLoading';
 import { Lifecycle } from 'react-router';
-import { getData, changeFetchState, finishedOne } from '../actions/fetchDataList';
+import { fetchBlogList } from '../actions/blogListAction';
 require('../css/Blog.scss');
 
-/**
- *  App component is top component of all.
- */
 class Blog extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const { dispatch, data, isFetching, count } = this.props;
+        const { dispatch, data, display } = this.props;
+
         return (
             <div className="blog">
                 <Header></Header>
-                <Loading loadingFinished={ () =>
-                    dispatch(changeFetchState(false))
-                } count={ count } isFetching={ isFetching }></Loading>
-                <List count={ count } onFinished={ () => dispatch(finishedOne()) } isFetching={ isFetching } items={ data } onInit={ () =>
-                        dispatch(getData())
+                <List data={ data } display={ !display } fetchBlogList={
+                    bindActionCreators(fetchBlogList, dispatch)
                 }></List>
-                <div className="footer" style={{ display: this.props.isFetching ? 'none' : 'block' }}>
+                <div className="footer" style={{ display: display ? 'block' : 'none' }}>
                     <Footer></Footer>
                 </div>
             </div>
@@ -41,9 +37,8 @@ class Blog extends Component {
 
 function selector (state) {
     return {
-        data: state.data,
-        isFetching: state.fetchState,
-        count: state.count
+        data: state.blogList.get('data'),
+        display: state.blogList.get('displayState')
     }
 }
 

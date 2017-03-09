@@ -1,4 +1,4 @@
-import { IS_FETCHING, RECEIVED_DATA, COMPONENT_FINISHED, DATA_TOTAL_SIZE } from '../../actions/fetchDataList';
+import { IS_FETCHING, RECEIVED_DATA, COMPONENT_FINISHED, DATA_TOTAL_SIZE, SHOW_LOADING } from '../../actions/fetchDataList';
 /**
   * update blog list state
   * @param {Object} state list data of blog
@@ -14,15 +14,15 @@ function updateListitems (state = [], action) {
     }
 }
 /**
-  * show progress bar
+  * show loading
   * @param {Boolean} state show state of progress bar
   * @param {Object} action state type object
   * @return {Object} state new state of function
   */
-function showProgressBar (state = true, action) {
+function showLoading (state = true, action) {
     switch (action.type) {
-        case IS_FETCHING:
-            return action.fetchState;
+        case SHOW_LOADING:
+            return action.display;
         default:
             return state;
     }
@@ -55,7 +55,5 @@ function showProgressBar (state = true, action) {
 
 //  export
 export default {
-    data: updateListitems,
-    fetchState: showProgressBar,
-    count: handleFinishedCount
+    data: updateListitems
 }

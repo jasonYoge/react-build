@@ -19,10 +19,6 @@ export default class BlogListItem extends Component {
         );
     }
 
-    componentDidMount() {
-        this.props.onFinished();
-    }
-
     getTagname () {
         return this.props.tag.reduce((a, b) => {
             return `${a}, ${b}`;
@@ -39,7 +35,6 @@ export default class BlogListItem extends Component {
 }
 
 BlogListItem.propTypes = {
-    onFinished: PropTypes.func.isRequired,
     date: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     tag: PropTypes.array.isRequired,
