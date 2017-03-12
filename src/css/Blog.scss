@@ -3,3 +3,7 @@
 .blog {
     @include content;
 }
+
+.blog-hide {
+    display: none;
+}

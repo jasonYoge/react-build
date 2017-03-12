@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
-// require('font-awesome-webpack');
+import Loading from './Loading';
 require('../css/Main.scss');
 
 /**
@@ -11,6 +11,7 @@ export default class App extends Component {
         return (
             <div className="app">
                 <Navbar router={this.props.router}></Navbar>
+                <Loading />
                 {this.props.children}
             </div>
         );

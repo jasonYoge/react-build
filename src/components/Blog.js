@@ -4,11 +4,16 @@ import { bindActionCreators } from 'redux';
 import Header from './BlogHeader';
 import List from './BlogList';
 import Footer from './Footer';
-import Loading from './BlogLoading';
+import classNames from 'classnames';
 import { Lifecycle } from 'react-router';
 import { fetchBlogList } from '../actions/blogListAction';
+import { showLoadingCreator } from '../actions/showLoadingAction';
 require('../css/Blog.scss');
 
+// @connect(state => ({
+//     data: state.blogList.get('data'),
+//     display: state.displayState
+// }))
 class Blog extends Component {
     constructor(props) {
         super(props);
@@ -16,14 +21,20 @@ class Blog extends Component {
 
     render() {
         const { dispatch, data, display } = this.props;
+        let classnames = classNames({
+            blog: true,
+            'blog-hide': !display
+        });
 
         return (
-            <div className="blog">
+            <div className={ classnames }>
                 <Header></Header>
-                <List data={ data } display={ !display } fetchBlogList={
+                <List data={ data } fetchBlogList={
                     bindActionCreators(fetchBlogList, dispatch)
+                } showLoading={
+                    bindActionCreators(showLoadingCreator, dispatch)
                 }></List>
-                <div className="footer" style={{ display: display ? 'block' : 'none' }}>
+                <div className="footer">
                     <Footer></Footer>
                 </div>
             </div>
@@ -38,7 +49,7 @@ class Blog extends Component {
 function selector (state) {
     return {
         data: state.blogList.get('data'),
-        display: state.blogList.get('displayState')
+        display: !state.showLoading
     }
 }
 

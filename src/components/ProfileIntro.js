@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 require('../css/ProfileIntro.scss');
 
 /**
- *  Header component is index page.
+ *  Header component in index page.
  */
 const Introduction = () => (
     <section className="profile-intro">
