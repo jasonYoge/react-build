@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
 import marked from 'marked';
 
 require('../css/ArticleContent.scss');
@@ -11,7 +12,15 @@ export default class ArticleContent extends Component {
     }
 
     shouldComponentUpdate (nextProp, nextState) {
-        if (nextProp.content !== this.props.content) {
+        if (nextProp.content.length !== 0) {
+
+            //  获取DOM节点，修改内容
+            const domNode = findDOMNode(this.refs.content);
+            const content = marked(nextProp.content);
+
+            if (content.length !== 0)
+                domNode.innerHTML = content;
+
             //  预留时间渲染页面
             setTimeout(() => {
                 this.props.showLoading(false);
@@ -22,9 +31,7 @@ export default class ArticleContent extends Component {
     }
 
     render () {
-        const content = marked(this.props.content);
-
-        return (<div className="content"> { content } </div>);
+        return (<div ref="content" className="content"></div>);
     }
 }
 

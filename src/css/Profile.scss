@@ -3,6 +3,8 @@
 .profile {
     @include content;
     overflow-x: hidden;
+    overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
 }
 
 .profile-hide {

@@ -17,10 +17,12 @@ class Article extends Component {
             show: false,
             showPanel: false
         };
+
+        this.addCommentPanel = this.addCommentPanel.bind(this);
     }
 
     componentWillMount() {
-        // const id = this.props.params.id;
+        const id = this.props.params.id;
         // const Xhttp = window.XMLHttpRequest;
         // let self = this;
 
@@ -45,7 +47,8 @@ class Article extends Component {
         // )
 
         //  组件Mount时抛出异部Action，从服务器拉取数据
-        this.props.dispatch(fetchArticleCreator());
+        console.log('dispatch');
+        this.props.dispatch(fetchArticleCreator(id));
     }
 
     render () {
@@ -58,9 +61,9 @@ class Article extends Component {
         return (
             <div className={ classList }>
                 <Content content={ content } showLoading={ bindActionCreators(showLoadingCreator, dispatch)} />
-                <button className="show-btn" style={{display: this.state.showPanel ? 'none' : 'block'}} onClick={ this.addCommentPanel.bind(this) }>查看评论</button>
+                <button className="show-btn" style={{display: this.state.showPanel ? 'none' : 'block'}} onClick={ this.addCommentPanel }>查看评论</button>
                 <div className="ds-thread" style={{display: this.state.showPanel ? 'block' : 'none'}}></div>
-                <div style={{display: this.state.show ? 'block' : 'none'}}>
+                <div>
                     <Footer></Footer>
                 </div>
             </div>
@@ -70,10 +73,11 @@ class Article extends Component {
     //  添加多说评论面板
     addCommentPanel () {
         let script = document.createElement('script');
+        let head = document.getElementsByTagName('head')[0];
         let contentElem = this.refs.content;
 
         script.text = 'var duoshuoQuery = {short_name:"yangwenjie"};(function() {var ds = document.createElement("script");ds.type = "text/javascript";ds.async = true;ds.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//static.duoshuo.com/embed.js";ds.charset = "UTF-8";(document.getElementsByTagName("head")[0]|| document.getElementsByTagName("body")[0]).appendChild(ds);})();';
-        contentElem.appendChild(script);
+        head.appendChild(script);
         this.setState({ showPanel: true });
     }
 
@@ -92,5 +96,5 @@ class Article extends Component {
 
 export default connect(store => ({
     display: !store.showLoading,
-    content: ''
+    content: store.content
 }))(Article)

@@ -8,6 +8,8 @@ export default class BlogList extends Component {
     componentWillMount() {
         if (this.props.data.length === 0) {
             this.props.fetchBlogList();
+        } else {
+            this.props.showLoading(false);
         }
     }
 

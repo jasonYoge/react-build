@@ -12,7 +12,6 @@ const Root = ({ store }) => (
                 <IndexRedirect to="profile" />
                 <Route path="profile" component={Profile} />
                 <Route onEnter={ dispatchShowLoadingAction.bind(store) } path="blog" getComponent={(nextState, callback) => {
-                    console.log('调用Get blog');
                     System.import('./components/Blog').then(Blog => {
                         callback(null, Blog.default);
                     });
@@ -28,7 +27,6 @@ const Root = ({ store }) => (
 );
 
 function dispatchShowLoadingAction (nextState, replaceState) {
-    console.log('dispatch show loading action.');
     this.dispatch(showLoadingCreator(true));
 }
 
